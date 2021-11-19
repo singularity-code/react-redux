@@ -62,7 +62,7 @@ function todos(state = initialState, action) {
     case TOGGLE:
       return {
         ...state,
-        input: state.todos.map((todo) =>
+        todos: state.todos.map((todo) =>
           todo.id === action.id
             ? {
                 ...todo,
