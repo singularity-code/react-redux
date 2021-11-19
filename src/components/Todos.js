@@ -1,42 +1,35 @@
 import React from 'react';
 
-const TodoItem = ({ todo, ontoggle, onRemove }) => {
+const TodoItem = ({ todo, onToggle, onRemove }) => {
   return (
     <div>
-      <input type="checkbox" />
-      <span>Sample Text</span>
-
-      <button>Delete</button>
+      <input type="checkbox" onClick={() => onToggle(todo.id)} checked={todo.done} readOnly={true} />
+      <span style={{ textDecoration: todo.done ? 'line-through' : 'none' }}>{todo.text}</span>
+      <button onClick={() => onRemove(todo.id)}>Delete</button>
     </div>
   );
 };
 
-const Todos = ({
-  input,
-  todos,
-  onChangeInput,
-  onInsert,
-  onToggle,
-  onRemove,
-}) => {
+const TodosList = ({ input, todos, onChangeInput, onInsert, onToggle, onRemove }) => {
   const onSubmit = (e) => {
     e.preventDefault();
+    onInsert(input);
+    onChangeInput('');
   };
+  const onChange = (e) => onChangeInput(e.target.value);
   return (
     <div>
-        <form onSubmit={onSubmit}>
-            <input/>
-            <button type="submit">SUBMIT</button>
-        </form>
-        <div>
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
-        </div>
+      <form onSubmit={onSubmit}>
+        <input value={input} onChange={onChange} />
+        <button type="submit">SUBMIT</button>
+      </form>
+      <div>
+        {todos ? todos.map((todo) => (
+          <TodoItem todo={todo} key={todo.id} onToggle={onToggle} onRemove={onRemove} />
+        )) : <div/>}
+      </div>
     </div>
   );
 };
 
-export default Todos;
+export default TodosList;
