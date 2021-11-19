@@ -1,14 +1,15 @@
-import TodosContainer from './components/Todos';
-import CounterContainerWithBinder from './containers/CounterContainer';
+import React from 'react';
+import CounterContainer from './containers/CounterContainer';
+import TodosContainer from './containers/TodosContainers';
 
-function App() {
+const App = () => {
   return (
     <div>
-      <CounterContainerWithBinder></CounterContainerWithBinder>
+      <CounterContainer />
       <hr />
-      <TodosContainer></TodosContainer>
+      <TodosContainer />
     </div>
   );
-}
+};
 
 export default App;
