@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
-import { changeInput, insert, toggle, remove } from '../modules/todos';
+import { changeInput } from '../modules/todos';
 import Todos from '../components/Todos';
 
 const TodosContainerWithHooks = () => {
@@ -16,3 +16,5 @@ const TodosContainerWithHooks = () => {
 
   return <Todos input={input} todos={todos} onChangeInput={onChangeInput} onInsert={onInsert} onToggle={onToggle} onRemove={onRemove}></Todos>;
 };
+
+export default TodosContainerWithHooks;
