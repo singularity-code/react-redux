@@ -34,15 +34,18 @@ const initialState = {
   ],
 };
 
+// use immer (produce)
 const todos = handleActions(
   {
     [CHANGE_INPUT]: (state, { payload: input }) =>
       produce(state, draft => {
         draft.input = input;
       }),
+    // some simple action do not need to use immer lib
     [INSERT]: (state, { payload: todo }) =>
-      produce(state, draft => {
-        draft.todos.push(todo);
+      ({
+        ...state,
+        todos: state.todos.concat(todo),
       }),
     [TOGGLE]: (state, { payload: id }) =>
       produce(state, draft => {
